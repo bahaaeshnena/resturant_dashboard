@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579924678976",
+    "project_id": "task-galaxy",
+    "storage_bucket": "task-galaxy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579924678976:android:1896dbe3aed0b3876182a5",
+        "android_client_info": {
+          "package_name": "com.example.task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSxjxq6Q5JDKpNnLM84HIoNEx1UrXLJME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
