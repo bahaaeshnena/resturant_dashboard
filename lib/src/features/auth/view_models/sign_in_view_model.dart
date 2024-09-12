@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,7 +9,7 @@ import 'package:task/src/features/home/presentation/views/home_view.dart';
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 
 class SignInViewModel extends ChangeNotifier {
-  SignInViewModel();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -85,6 +86,11 @@ class SignInViewModel extends ChangeNotifier {
       );
       UserCredential userCredential =
           await _firebaseAuth.signInWithCredential(credential);
+
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'fullName': googleUser.displayName,
+        'email': googleUser.email,
+      });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);

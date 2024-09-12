@@ -1,38 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:task/src/features/auth/view_models/sign_in_view_model.dart';
+import 'package:task/src/core/utils/constants/colors.dart';
+import 'package:task/src/features/home/presentation/views/drawer/custom_drawer.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => SignInViewModel(),
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+    return SafeArea(
       child: Scaffold(
+        key: scaffoldKey,
+        drawer: const CustomDrawer(),
         appBar: AppBar(
-          title: const Text('Home'),
+          backgroundColor: ColorsApp.secondaryColor,
+          centerTitle: true,
+          title: const Text(
+            'Home',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-        body: Column(
-          children: [
-            Consumer<SignInViewModel>(
-              builder: (context, value, child) {
-                return GestureDetector(
-                  onTap: () {
-                    value.logout(context);
-                  },
-                  child: Center(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.red,
-                      child: const Text('Logout'),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+        body: const Column(
+          children: [],
         ),
       ),
     );

@@ -8,9 +8,7 @@ import 'package:task/src/features/home/presentation/views/home_view.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore =
-      FirebaseFirestore.instance; // Firestore instance
-  // final BuildContext context;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
