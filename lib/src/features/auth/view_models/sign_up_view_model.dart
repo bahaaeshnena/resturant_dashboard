@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/src/core/utils/helpers/helper_function.dart';
 import 'package:task/src/features/auth/models/user_model.dart';
-import 'package:task/src/features/auth/presentation/views/home/home_view.dart';
+import 'package:task/src/features/home/presentation/views/home_view.dart';
 
 class SignUpViewModel extends ChangeNotifier {
-  SignUpViewModel();
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore =
       FirebaseFirestore.instance; // Firestore instance
@@ -52,11 +51,14 @@ class SignUpViewModel extends ChangeNotifier {
         password: user.password,
       );
 
-      // Store user data in Firestore
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'fullName': user.fullName,
         'email': user.email,
       });
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('userEmail', user.email);
 
       // ignore: use_build_context_synchronously
       await Navigator.of(context).push(
