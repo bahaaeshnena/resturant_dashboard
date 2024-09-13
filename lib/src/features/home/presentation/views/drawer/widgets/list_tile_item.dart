@@ -18,7 +18,12 @@ class ListTileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: SvgPicture.asset(icon),
+      leading: SvgPicture.asset(
+        fit: BoxFit.cover,
+        icon,
+        height: 30,
+        width: 30,
+      ),
       title: Text(title),
       subtitle: Text(subTitle),
     );

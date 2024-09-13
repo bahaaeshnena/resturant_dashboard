@@ -47,6 +47,13 @@ class CustomDrawer extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ListTileItem(
+              title: 'Add table',
+              subTitle: 'Add a table and chairs to the system.',
+              icon: "assets/images/add.svg",
+              onTap: () {},
+            ),
+            const SizedBox(height: 10),
+            ListTileItem(
               title: 'Create an invoice',
               subTitle: 'Create order invoices for customers',
               icon: "assets/images/moneys.svg",
