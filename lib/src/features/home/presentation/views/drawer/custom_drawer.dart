@@ -19,12 +19,24 @@ class CustomDrawer extends StatelessWidget {
               "Profile",
               style: TextStyle(fontSize: 20),
             ),
-            // Use Consumer to get the userName and userEmail
-            ListTileItem(
-              title: 'User',
-              subTitle: 'Email',
-              icon: "assets/images/user.svg",
-              onTap: () {},
+            Consumer<AuthViewModel>(
+              builder: (context, authViewModel, child) {
+                final user = authViewModel.currentUser;
+
+                if (user != null) {
+                  return ListTileItem(
+                    title: user.fullName!,
+                    subTitle: user.email,
+                    icon: "assets/images/user.svg",
+                  );
+                } else {
+                  return const ListTileItem(
+                    title: 'No User Data',
+                    subTitle: '',
+                    icon: "assets/images/user.svg",
+                  );
+                }
+              },
             ),
             const Divider(),
             ListTileItem(

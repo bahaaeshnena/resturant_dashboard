@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/features/auth/presentation/views/sign_up/sign_up_view.dart';
+import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 
 class SocialButton extends StatelessWidget {
   const SocialButton({
@@ -15,17 +17,23 @@ class SocialButton extends StatelessWidget {
         children: [
           const Text('Or Sign in With '),
           const SizedBox(height: 30),
-          GestureDetector(
-            onTap: () {},
-            child: Card(
-              elevation: 7,
-              color: Colors.white,
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: Image.asset('assets/images/Icon-google.png'),
-              ),
-            ),
+          Consumer<AuthViewModel>(
+            builder: (context, value, child) {
+              return GestureDetector(
+                onTap: () {
+                  value.signInWithGoogle(context);
+                },
+                child: Card(
+                  elevation: 7,
+                  color: Colors.white,
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Image.asset('assets/images/Icon-google.png'),
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 50),
           Row(

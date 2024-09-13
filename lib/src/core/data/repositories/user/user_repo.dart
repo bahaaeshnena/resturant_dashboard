@@ -84,4 +84,13 @@ class UserRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('user'); // Adjust key as necessary
   }
+
+  Future<UserModel?> getUserFromLocal() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? userData = prefs.getString('user');
+    if (userData != null) {
+      return UserModel.fromJson(userData);
+    }
+    return null;
+  }
 }
