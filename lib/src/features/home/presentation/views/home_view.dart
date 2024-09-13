@@ -21,7 +21,9 @@ class HomeView extends StatelessWidget {
           ),
         ),
         body: const Column(
-          children: [],
+          children: [
+            Text(''),
+          ],
         ),
       ),
     );

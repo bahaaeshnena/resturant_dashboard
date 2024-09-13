@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/firebase_options.dart';
+import 'package:task/src/core/data/repositories/user/user_repo.dart';
+import 'package:task/src/features/auth/view_models/auth_view_model.dart';
+import 'package:task/src/features/auth/view_models/password_visibility_provider.dart';
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 import 'package:task/src/features/home/presentation/views/home_view.dart';
-import 'package:task/src/features/auth/view_models/sign_in_view_model.dart';
-import 'package:task/src/features/auth/view_models/sign_up_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,10 +32,10 @@ class Task extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => SignInViewModel(),
+          create: (_) => AuthViewModel(userRepository: UserRepository()),
         ),
         ChangeNotifierProvider(
-          create: (_) => SignUpViewModel(),
+          create: (_) => PasswordVisibilityProvider(),
         ),
       ],
       child: MaterialApp(

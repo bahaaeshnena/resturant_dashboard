@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task/src/core/data/repositories/user/user_repo.dart';
 import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/core/utils/validators/validator.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 import 'package:task/src/core/utils/widgets/custom_text_field.dart';
-import 'package:task/src/features/auth/view_models/sign_up_view_model.dart';
+import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 import 'package:task/src/features/auth/view_models/password_visibility_provider.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -18,12 +19,12 @@ class SignUpForm extends StatelessWidget {
           create: (_) => PasswordVisibilityProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SignUpViewModel(),
+          create: (_) => AuthViewModel(userRepository: UserRepository()),
         ),
       ],
       child: Consumer<PasswordVisibilityProvider>(
         builder: (context, passwordVisibilityProvider, child) {
-          return Consumer<SignUpViewModel>(
+          return Consumer<AuthViewModel>(
             builder: (context, viewModelSignUp, child) {
               return Form(
                 key: viewModelSignUp.signupFormKey,
@@ -91,7 +92,11 @@ class SignUpForm extends StatelessWidget {
                         ? const Center(child: CircularProgressIndicator())
                         : CustomElevatedButton(
                             onPressed: () async {
-                              viewModelSignUp.signUp(context);
+                              await viewModelSignUp.signUp(
+                                viewModelSignUp.emailController.text.trim(),
+                                viewModelSignUp.passwordController.text.trim(),
+                                context,
+                              );
                             },
                             text: "Sign Up",
                           ),
