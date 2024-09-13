@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task/src/features/home/presentation/views/drawer/add_table_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/list_tile_item.dart';
 import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 
@@ -50,7 +51,13 @@ class CustomDrawer extends StatelessWidget {
               title: 'Add table',
               subTitle: 'Add a table and chairs to the system.',
               icon: "assets/images/add.svg",
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddTableView(),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 10),
             ListTileItem(

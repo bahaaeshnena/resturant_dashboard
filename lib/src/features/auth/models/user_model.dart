@@ -3,7 +3,7 @@ import 'dart:convert';
 class UserModel {
   final String? fullName;
   final String email;
-  final String password; // Add this field for password
+  final String password;
 
   UserModel({
     this.fullName,
