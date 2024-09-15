@@ -32,7 +32,7 @@ class SignUpForm extends StatelessWidget {
                   const SizedBox(height: 45),
                   CustomTextField(
                     validator: (value) =>
-                        Validator.volidateEmptyText('Full Name', value),
+                        Validator.validateEmptyText('Full Name', value),
                     controller: viewModelSignUp.fullNameController,
                     icon: 'assets/images/user.svg',
                     hint: 'Full Name',
@@ -61,7 +61,7 @@ class SignUpForm extends StatelessWidget {
                   const SizedBox(height: 40),
                   CustomTextField(
                     validator: (value) =>
-                        Validator.volidateEmptyText("Confirm Password", value),
+                        Validator.validateEmptyText("Confirm Password", value),
                     controller: viewModelSignUp.confirmPasswordController,
                     obscureText:
                         !passwordVisibilityProvider.isConfirmPasswordVisible,

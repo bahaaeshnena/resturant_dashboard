@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:task/src/core/data/repositories/tabeles/tabel_repo.dart';
 import 'package:task/src/features/home/models/tabel_model.dart';
@@ -7,8 +9,7 @@ class TableViewModel extends ChangeNotifier {
   TableViewModel({required TableRepo tableRepo}) : _tableRepo = tableRepo;
 
   final TableRepo _tableRepo;
-  // ignore: prefer_final_fields
-  List<TableModel> _tables = [];
+  final List<TableModel> _tables = [];
   List<TableModel> get tables => _tables;
 
   bool _isLoading = false;
@@ -22,6 +23,7 @@ class TableViewModel extends ChangeNotifier {
 
   String _status = 'Available';
   String get status => _status;
+  String tableId = '';
 
   set status(String value) {
     _status = value;
@@ -30,10 +32,16 @@ class TableViewModel extends ChangeNotifier {
 
   GlobalKey<FormState> addTabelFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> updateTabelFormKey = GlobalKey<FormState>();
+
   final TextEditingController numberOfChairsController =
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  final TextEditingController statusController = TextEditingController();
+
+  // final TextEditingController updateNumberOfChairsController =
+  //     TextEditingController();
+  // final TextEditingController updateNameController = TextEditingController();
+  // final TextEditingController updateStatusController = TextEditingController();
 
   Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
@@ -50,7 +58,6 @@ class TableViewModel extends ChangeNotifier {
         _errorMessage = 'Table name is already in use';
         _successMessage = null;
 
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(_errorMessage!),
@@ -78,7 +85,6 @@ class TableViewModel extends ChangeNotifier {
       numberOfChairsController.clear();
       nameController.clear();
 
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(_successMessage!),
@@ -88,7 +94,6 @@ class TableViewModel extends ChangeNotifier {
       _errorMessage = 'Failed to add table';
       _successMessage = null;
 
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(_errorMessage!),
@@ -108,6 +113,72 @@ class TableViewModel extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _errorMessage = 'Failed to delete table';
+      notifyListeners();
+    }
+  }
+
+  Future<void> updateTable(BuildContext context, String id) async {
+    if (!updateTabelFormKey.currentState!.validate()) {
+      return;
+    }
+
+    _setLoading(true);
+    try {
+      // Fetch tables by name to check for name conflicts
+      var querySnapshot = await _tableRepo.getTablesByName(nameController.text);
+
+      if (querySnapshot.docs.isNotEmpty && querySnapshot.docs.first.id != id) {
+        _errorMessage = 'Table name is already in use';
+        _successMessage = null;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_errorMessage!),
+            backgroundColor: Colors.red,
+          ),
+        );
+
+        notifyListeners();
+        return;
+      }
+
+      // Create the updated table model
+      TableModel updatedTable = TableModel(
+        id: id,
+        status: statusController.text,
+        name: nameController.text,
+        numberOfChairs: numberOfChairsController.text,
+      );
+
+      // Update the table in the repository
+      await _tableRepo.updateTable(updatedTable);
+
+      // Update the local table list
+      final index = _tables.indexWhere((table) => table.id == id);
+      if (index != -1) {
+        _tables[index] = updatedTable;
+      }
+
+      _errorMessage = null;
+      _successMessage = 'Table updated successfully';
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_successMessage!),
+        ),
+      );
+    } catch (e) {
+      _errorMessage = 'Failed to update table';
+      _successMessage = null;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_errorMessage!),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      _setLoading(false);
       notifyListeners();
     }
   }

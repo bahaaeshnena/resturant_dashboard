@@ -9,7 +9,9 @@ import 'package:task/src/features/home/view_models/tabel_view_model.dart';
 import '../../../../../../core/common/widgets/app_text_field.dart';
 
 class UpdateTableView extends StatelessWidget {
-  const UpdateTableView({super.key});
+  final String tableId;
+
+  const UpdateTableView({super.key, required this.tableId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class UpdateTableView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Consumer<TableViewModel>(
             builder: (context, tableViewModel, child) {
+              // Pass the tableId to the ViewModel or handle accordingly
               return Column(
                 children: [
                   Form(
@@ -28,8 +31,10 @@ class UpdateTableView extends StatelessWidget {
                       children: [
                         CustomTextField(
                           controller: tableViewModel.numberOfChairsController,
-                          validator: (value) => Validator.volidateEmptyText(
-                              "Number of chairs", value),
+                          validator: (value) => Validator.validateEmptyText(
+                            "Number of chairs",
+                            value,
+                          ),
                           keyboardType: TextInputType.number,
                           icon: 'assets/images/number.svg',
                           hint: 'Number of chairs',
@@ -37,8 +42,10 @@ class UpdateTableView extends StatelessWidget {
                         const SizedBox(height: 20),
                         CustomTextField(
                           controller: tableViewModel.nameController,
-                          validator: (value) =>
-                              Validator.volidateEmptyText("Name Table", value),
+                          validator: (value) => Validator.validateEmptyText(
+                            "Name Table",
+                            value,
+                          ),
                           icon: 'assets/images/name.svg',
                           hint: 'Name Table',
                         ),
@@ -51,13 +58,16 @@ class UpdateTableView extends StatelessWidget {
                           textEditingController:
                               tableViewModel.statusController,
                           title: 'Select Status',
-                          hint: 'status',
+                          hint: 'Status',
                           isCategorySelected: true,
                         ),
                         const SizedBox(height: 20),
                         CustomElevatedButton(
                           text: 'Update',
-                          onPressed: () {},
+                          onPressed: () {
+                            // Call the updateTable method with the passed tableId
+                            tableViewModel.updateTable(context, tableId);
+                          },
                         ),
                       ],
                     ),

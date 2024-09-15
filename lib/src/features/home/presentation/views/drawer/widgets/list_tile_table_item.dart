@@ -20,7 +20,7 @@ class ListTileTableItem extends StatelessWidget {
     Color statusColor;
     if (tableModel.status == 'Available') {
       statusColor = Colors.green;
-    } else if (tableModel.status == 'reserved') {
+    } else if (tableModel.status == 'Reserved') {
       statusColor = Colors.red;
     } else {
       statusColor = Colors.black;
@@ -49,7 +49,7 @@ class ListTileTableItem extends StatelessWidget {
               children: [
                 const Text('Status: '),
                 Text(
-                  tableModel.status!,
+                  tableModel.status,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: statusColor,

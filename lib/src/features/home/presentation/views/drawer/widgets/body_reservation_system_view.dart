@@ -32,8 +32,16 @@ class BodyReservationSystemView extends StatelessWidget {
                     TableModel table = tables[index];
                     return ListTileTableItem(
                       onTapEdit: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const UpdateTableView()));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => UpdateTableView(
+                              tableId: table.id!,
+                            ),
+                            settings: RouteSettings(
+                              arguments: table, // Pass the selected TableModel
+                            ),
+                          ),
+                        );
                       },
                       onTapDelete: () async {
                         final shouldDelete = await showDialog<bool>(
@@ -71,7 +79,7 @@ class BodyReservationSystemView extends StatelessWidget {
                           context,
                           table.name,
                           table.id!,
-                          table.status!,
+                          table.status,
                           table.numberOfChairs.toString(),
                         );
                       },

@@ -25,7 +25,7 @@ class BodyAddTableView extends StatelessWidget {
                     children: [
                       CustomTextField(
                         controller: tableViewModel.numberOfChairsController,
-                        validator: (value) => Validator.volidateEmptyText(
+                        validator: (value) => Validator.validateEmptyText(
                             "Number of chairs", value),
                         keyboardType: TextInputType.number,
                         icon: 'assets/images/number.svg',
@@ -35,7 +35,7 @@ class BodyAddTableView extends StatelessWidget {
                       CustomTextField(
                         controller: tableViewModel.nameController,
                         validator: (value) =>
-                            Validator.volidateEmptyText("Name Table", value),
+                            Validator.validateEmptyText("Name Table", value),
                         icon: 'assets/images/name.svg',
                         hint: 'Name Table',
                       ),

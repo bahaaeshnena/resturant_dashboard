@@ -10,6 +10,7 @@ class AppTextField extends StatefulWidget {
   final bool isCategorySelected;
   final List<SelectedListItem>? categories;
   final String? Function(String?)? validate;
+
   const AppTextField({
     required this.textEditingController,
     required this.title,
@@ -21,7 +22,6 @@ class AppTextField extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _AppTextFieldState createState() => _AppTextFieldState();
 }
 
@@ -53,15 +53,15 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         data: widget.categories ?? [],
         selectedItems: (List<dynamic> selectedList) {
-          List<String> list = [];
-          for (var item in selectedList) {
+          if (selectedList.isNotEmpty) {
+            // تأكد من أنه يتم تعيين القيمة بشكل صحيح
+            var item = selectedList.first;
             if (item is SelectedListItem) {
-              list.add(item.name);
               widget.textEditingController.text = item.name;
+              // Notify the UI to reflect changes if needed
+              setState(() {});
             }
           }
-          // TLoaders.successSnackBar(
-          //     title: 'Success Category selected', message: list.toString());
         },
         enableMultipleSelection: false,
       ),
@@ -74,9 +74,7 @@ class _AppTextFieldState extends State<AppTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.title),
-        const SizedBox(
-          height: 5.0,
-        ),
+        const SizedBox(height: 5.0),
         TextFormField(
           readOnly: true,
           validator: widget.validate,
@@ -98,20 +96,14 @@ class _AppTextFieldState extends State<AppTextField> {
             ),
             filled: true,
             fillColor: Colors.black12,
-            // contentPadding:
-            //     const EdgeInsets.only(left: 8, bottom: 0, top: 0, right: 15),
-            hintText: widget.textEditingController.text == ""
-                ? widget.hint
-                : widget.textEditingController.text,
+            hintText: widget.hint,
             border: const OutlineInputBorder().copyWith(
               borderRadius: BorderRadius.circular(14),
               borderSide: const BorderSide(width: 1, color: Colors.grey),
             ),
           ),
         ),
-        const SizedBox(
-          height: 15.0,
-        ),
+        const SizedBox(height: 15.0),
       ],
     );
   }

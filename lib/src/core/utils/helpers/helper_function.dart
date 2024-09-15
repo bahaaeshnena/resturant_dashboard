@@ -11,7 +11,7 @@ class HelperFunction {
     Color statusColor;
     if (status == 'Available') {
       statusColor = Colors.green;
-    } else if (status == 'reserved') {
+    } else if (status == 'Reserved') {
       statusColor = Colors.red;
     } else {
       statusColor = Colors.black;

@@ -1,5 +1,5 @@
 class Validator {
-  static String? volidateEmptyText(String? fieldName, String? value) {
+  static String? validateEmptyText(String? fieldName, String? value) {
     if (value == null || value.isEmpty) {
       // ignore: prefer_adjacent_string_concatenation, unnecessary_brace_in_string_interps
       return '${fieldName} is Required';
