@@ -71,35 +71,3 @@ class UpdateTableView extends StatelessWidget {
     );
   }
 }
-// Row(
-//                           children: [
-//                             Expanded(
-//                               child: ListTile(
-//                                 title: const Text('Available'),
-//                                 leading: Radio<String>(
-//                                   value: 'Available',
-//                                   groupValue: tableViewModel.status,
-//                                   onChanged: (value) {
-//                                     if (value != null) {
-//                                       tableViewModel.status = value;
-//                                     }
-//                                   },
-//                                 ),
-//                               ),
-//                             ),
-//                             Expanded(
-//                               child: ListTile(
-//                                 title: const Text('Reserved'),
-//                                 leading: Radio<String>(
-//                                   value: 'Reserved',
-//                                   groupValue: tableViewModel.status,
-//                                   onChanged: (value) {
-//                                     if (value != null) {
-//                                       tableViewModel.status = value;
-//                                     }
-//                                   },
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
