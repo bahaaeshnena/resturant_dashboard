@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/features/home/presentation/views/drawer/add_table_view.dart';
+import 'package:task/src/features/home/presentation/views/drawer/reservation_system_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/list_tile_item.dart';
 import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 
@@ -44,7 +45,10 @@ class CustomDrawer extends StatelessWidget {
               title: 'Reservation system',
               subTitle: 'To reserve tables and seats',
               icon: "assets/images/category-2.svg",
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ReservationSystemView()));
+              },
             ),
             const SizedBox(height: 10),
             ListTileItem(

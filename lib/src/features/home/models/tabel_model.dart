@@ -1,45 +1,53 @@
 import 'dart:convert';
 
-class TabelModel {
+class TableModel {
   final String? id;
-  final String? condition;
+  final String name;
+  final String? status;
   final String numberOfChairs;
 
-  TabelModel({
+  TableModel({
     this.id,
-    this.condition = "Available",
+    this.status = "Available",
+    required this.name,
     required this.numberOfChairs,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'condition': condition,
+      'name': name,
+      'condition': status,
       'numberOfChairs': numberOfChairs,
     };
   }
 
-  factory TabelModel.fromMap(Map<String, dynamic> map) {
-    return TabelModel(
+  factory TableModel.fromMap(Map<String, dynamic> map) {
+    return TableModel(
       id: map['id'] as String,
-      condition: map['condition'] as String,
+      name: map['name'] as String,
+      status: map['condition'] as String,
       numberOfChairs: map['numberOfChairs'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TabelModel.fromJson(String source) =>
-      TabelModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TableModel.fromJson(String source) =>
+      TableModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  TabelModel copyWith({
+  TableModel copyWith({
     String? id,
+    String? name,
     String? condition,
     String? numberOfChairs,
+    required String status,
   }) {
-    return TabelModel(
+    return TableModel(
       id: id ?? this.id,
-      condition: condition ?? this.condition,
+      name: name ?? this.name,
+      // ignore: unnecessary_this
+      status: condition ?? this.status,
       numberOfChairs: numberOfChairs ?? this.numberOfChairs,
     );
   }

@@ -30,6 +30,14 @@ class BodyAddTableView extends StatelessWidget {
                         hint: 'Number of chairs',
                       ),
                       const SizedBox(height: 20),
+                      CustomTextField(
+                        controller: tableViewModel.nameController,
+                        validator: (value) =>
+                            Validator.volidateEmptyText("Name Table", value),
+                        icon: 'assets/images/name.svg',
+                        hint: 'Name Table',
+                      ),
+                      const SizedBox(height: 20),
                       CustomElevatedButton(
                         text: tableViewModel.isLoading
                             ? 'Adding...'
@@ -37,27 +45,7 @@ class BodyAddTableView extends StatelessWidget {
                         onPressed: tableViewModel.isLoading
                             ? null
                             : () async {
-                                await tableViewModel.addTable();
-
-                                if (tableViewModel.successMessage != null) {
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content:
-                                          Text(tableViewModel.successMessage!),
-                                    ),
-                                  );
-                                } else if (tableViewModel.errorMessage !=
-                                    null) {
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content:
-                                          Text(tableViewModel.errorMessage!),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                }
+                                await tableViewModel.addTable(context);
                               },
                       ),
                     ],

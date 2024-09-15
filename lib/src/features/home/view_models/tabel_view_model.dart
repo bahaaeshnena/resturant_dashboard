@@ -7,8 +7,9 @@ class TableViewModel extends ChangeNotifier {
   TableViewModel({required TableRepo tableRepo}) : _tableRepo = tableRepo;
 
   final TableRepo _tableRepo;
-  List<TabelModel> _tables = [];
-  List<TabelModel> get tables => _tables;
+  // ignore: prefer_final_fields
+  List<TableModel> _tables = [];
+  List<TableModel> get tables => _tables;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -22,29 +23,40 @@ class TableViewModel extends ChangeNotifier {
   GlobalKey<FormState> addTabelFormKey = GlobalKey<FormState>();
   final TextEditingController numberOfChairsController =
       TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
-  Future<void> fetchTables() async {
-    _setLoading(true);
-    try {
-      _tables = await _tableRepo.getTables();
-      _errorMessage = null;
-    } catch (e) {
-      _errorMessage = 'Failed to fetch tables';
-    } finally {
-      _setLoading(false);
-    }
-  }
+  Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
-  Future<void> addTable() async {
+  Future<void> addTable(BuildContext context) async {
     if (!addTabelFormKey.currentState!.validate()) {
       return;
     }
 
     _setLoading(true);
     try {
+      var querySnapshot = await _tableRepo.getTablesByName(nameController.text);
+
+      if (querySnapshot.docs.isNotEmpty) {
+        _errorMessage = 'Table name is already in use';
+        _successMessage = null;
+
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_errorMessage!),
+            backgroundColor: Colors.red,
+          ),
+        );
+
+        notifyListeners();
+        _setLoading(false);
+        return;
+      }
+
       String id = const Uuid().v4();
-      TabelModel newTable = TabelModel(
+      TableModel newTable = TableModel(
         id: id,
+        name: nameController.text,
         numberOfChairs: numberOfChairsController.text,
       );
 
@@ -53,11 +65,38 @@ class TableViewModel extends ChangeNotifier {
       _errorMessage = null;
       _successMessage = 'Table added successfully';
       numberOfChairsController.clear();
+      nameController.clear();
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_successMessage!),
+        ),
+      );
     } catch (e) {
       _errorMessage = 'Failed to add table';
       _successMessage = null;
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_errorMessage!),
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
       _setLoading(false);
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteTable(String id) async {
+    try {
+      await _tableRepo.deleteTable(id);
+      _tables.removeWhere((table) => table.id == id);
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to delete table';
       notifyListeners();
     }
   }

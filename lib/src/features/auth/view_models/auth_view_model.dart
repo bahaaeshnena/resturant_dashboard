@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/src/core/data/repositories/user/user_repo.dart';
-import 'package:task/src/core/utils/helpers/helper_function.dart';
 import 'package:task/src/features/auth/models/user_model.dart';
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 import 'package:task/src/features/home/presentation/views/home_view.dart';
@@ -56,11 +55,12 @@ class AuthViewModel with ChangeNotifier {
 
       if (passwordController.text.trim() !=
           confirmPasswordController.text.trim()) {
-        HelperFunction.showAlert(
-          // ignore: use_build_context_synchronously
-          context,
-          'Password Mismatch',
-          'The passwords do not match.',
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_errorMessage!),
+            backgroundColor: Colors.red,
+          ),
         );
         return;
       }
