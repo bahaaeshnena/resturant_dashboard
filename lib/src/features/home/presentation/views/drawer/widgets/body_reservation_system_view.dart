@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/helpers/helper_function.dart';
 import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/features/home/presentation/views/drawer/widgets/update_table_view.dart';
 import 'package:task/src/features/home/view_models/tabel_view_model.dart';
 import 'list_tile_table_item.dart';
 
@@ -31,7 +32,8 @@ class BodyReservationSystemView extends StatelessWidget {
                     TableModel table = tables[index];
                     return ListTileTableItem(
                       onTapEdit: () {
-                        // Handle edit action here
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const UpdateTableView()));
                       },
                       onTapDelete: () async {
                         final shouldDelete = await showDialog<bool>(

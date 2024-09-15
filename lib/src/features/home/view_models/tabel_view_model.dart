@@ -20,7 +20,16 @@ class TableViewModel extends ChangeNotifier {
   String? _successMessage;
   String? get successMessage => _successMessage;
 
+  String _status = 'Available';
+  String get status => _status;
+
+  set status(String value) {
+    _status = value;
+    notifyListeners();
+  }
+
   GlobalKey<FormState> addTabelFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> updateTabelFormKey = GlobalKey<FormState>();
   final TextEditingController numberOfChairsController =
       TextEditingController();
   final TextEditingController nameController = TextEditingController();

@@ -10,6 +10,7 @@ import 'package:task/src/features/auth/view_models/password_visibility_provider.
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 import 'package:task/src/features/home/presentation/views/home_view.dart';
 import 'package:task/src/features/home/view_models/tabel_view_model.dart';
+import 'package:task/src/features/home/view_models/table_status_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,9 @@ class Task extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => TableViewModel(tableRepo: TableRepo()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TableStatusNotifier('Available'),
         ),
       ],
       child: MaterialApp(

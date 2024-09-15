@@ -68,6 +68,18 @@ class TableRepo {
     }
   }
 
+  Future<void> updateTable(TableModel table) async {
+    try {
+      await _firestore
+          .collection(_collectionPath)
+          .doc(table.id)
+          .update(table.toMap());
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error updating table: $e');
+    }
+  }
+
   Future<QuerySnapshot> getTablesByName(String name) async {
     try {
       return await _firestore
