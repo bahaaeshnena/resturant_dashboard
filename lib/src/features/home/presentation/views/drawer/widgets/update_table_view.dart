@@ -1,9 +1,12 @@
+import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/validators/validator.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 import 'package:task/src/core/utils/widgets/custom_text_field.dart';
 import 'package:task/src/features/home/view_models/tabel_view_model.dart';
+
+import '../../../../../../core/common/widgets/app_text_field.dart';
 
 class UpdateTableView extends StatelessWidget {
   const UpdateTableView({super.key});
@@ -40,37 +43,16 @@ class UpdateTableView extends StatelessWidget {
                           hint: 'Name Table',
                         ),
                         const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: const Text('Available'),
-                                leading: Radio<String>(
-                                  value: 'Available',
-                                  groupValue: tableViewModel.status,
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      tableViewModel.status = value;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: const Text('Reserved'),
-                                leading: Radio<String>(
-                                  value: 'Reserved',
-                                  groupValue: tableViewModel.status,
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      tableViewModel.status = value;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
+                        AppTextField(
+                          categories: [
+                            SelectedListItem(name: 'Available'),
+                            SelectedListItem(name: 'Reserved'),
                           ],
+                          textEditingController:
+                              tableViewModel.statusController,
+                          title: 'Select Status',
+                          hint: 'status',
+                          isCategorySelected: true,
                         ),
                         const SizedBox(height: 20),
                         CustomElevatedButton(
@@ -89,3 +71,35 @@ class UpdateTableView extends StatelessWidget {
     );
   }
 }
+// Row(
+//                           children: [
+//                             Expanded(
+//                               child: ListTile(
+//                                 title: const Text('Available'),
+//                                 leading: Radio<String>(
+//                                   value: 'Available',
+//                                   groupValue: tableViewModel.status,
+//                                   onChanged: (value) {
+//                                     if (value != null) {
+//                                       tableViewModel.status = value;
+//                                     }
+//                                   },
+//                                 ),
+//                               ),
+//                             ),
+//                             Expanded(
+//                               child: ListTile(
+//                                 title: const Text('Reserved'),
+//                                 leading: Radio<String>(
+//                                   value: 'Reserved',
+//                                   groupValue: tableViewModel.status,
+//                                   onChanged: (value) {
+//                                     if (value != null) {
+//                                       tableViewModel.status = value;
+//                                     }
+//                                   },
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),

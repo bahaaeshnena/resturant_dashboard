@@ -3,12 +3,12 @@ import 'dart:convert';
 class TableModel {
   final String? id;
   final String name;
-  final String? status;
+  final String status;
   final String numberOfChairs;
 
   TableModel({
     this.id,
-    this.status = "Available",
+    required this.status,
     required this.name,
     required this.numberOfChairs,
   });

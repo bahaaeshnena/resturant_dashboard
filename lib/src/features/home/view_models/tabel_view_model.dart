@@ -33,6 +33,7 @@ class TableViewModel extends ChangeNotifier {
   final TextEditingController numberOfChairsController =
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
 
   Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
@@ -65,6 +66,7 @@ class TableViewModel extends ChangeNotifier {
       String id = const Uuid().v4();
       TableModel newTable = TableModel(
         id: id,
+        status: statusController.text,
         name: nameController.text,
         numberOfChairs: numberOfChairsController.text,
       );
