@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:task/src/core/data/repositories/tabeles/tabel_repo.dart';
 import 'package:task/src/features/home/models/tabel_model.dart';
@@ -37,11 +36,6 @@ class TableViewModel extends ChangeNotifier {
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
-
-  // final TextEditingController updateNumberOfChairsController =
-  //     TextEditingController();
-  // final TextEditingController updateNameController = TextEditingController();
-  // final TextEditingController updateStatusController = TextEditingController();
 
   Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
@@ -102,6 +96,7 @@ class TableViewModel extends ChangeNotifier {
       );
     } finally {
       _setLoading(false);
+      clearController();
       notifyListeners();
     }
   }
@@ -118,10 +113,6 @@ class TableViewModel extends ChangeNotifier {
   }
 
   Future<void> updateTable(BuildContext context, String id) async {
-    if (!updateTabelFormKey.currentState!.validate()) {
-      return;
-    }
-
     _setLoading(true);
     try {
       // Fetch tables by name to check for name conflicts
@@ -142,7 +133,6 @@ class TableViewModel extends ChangeNotifier {
         return;
       }
 
-      // Create the updated table model
       TableModel updatedTable = TableModel(
         id: id,
         status: statusController.text,
@@ -150,10 +140,8 @@ class TableViewModel extends ChangeNotifier {
         numberOfChairs: numberOfChairsController.text,
       );
 
-      // Update the table in the repository
       await _tableRepo.updateTable(updatedTable);
 
-      // Update the local table list
       final index = _tables.indexWhere((table) => table.id == id);
       if (index != -1) {
         _tables[index] = updatedTable;
@@ -179,6 +167,7 @@ class TableViewModel extends ChangeNotifier {
       );
     } finally {
       _setLoading(false);
+      clearController();
       notifyListeners();
     }
   }
@@ -191,6 +180,13 @@ class TableViewModel extends ChangeNotifier {
   void clearMessages() {
     _errorMessage = null;
     _successMessage = null;
+    notifyListeners();
+  }
+
+  void clearController() {
+    numberOfChairsController.clear();
+    nameController.clear();
+    statusController.clear();
     notifyListeners();
   }
 }
