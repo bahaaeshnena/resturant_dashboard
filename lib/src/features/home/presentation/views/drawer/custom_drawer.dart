@@ -42,8 +42,8 @@ class CustomDrawer extends StatelessWidget {
             ),
             const Divider(),
             ListTileItem(
-              title: 'Reservation system',
-              subTitle: 'To reserve tables and seats',
+              title: 'Restaurant System',
+              subTitle: 'Display tables in the restaurant',
               icon: "assets/images/category-2.svg",
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(

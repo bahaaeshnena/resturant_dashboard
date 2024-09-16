@@ -6,7 +6,9 @@ class CustomContainerTablesResturant extends StatelessWidget {
     super.key,
     required this.table,
   });
+
   final TableModel table;
+
   @override
   Widget build(BuildContext context) {
     Color statusColor;
@@ -17,20 +19,52 @@ class CustomContainerTablesResturant extends StatelessWidget {
     } else {
       statusColor = Colors.grey;
     }
-    return Center(
-      child: Container(
-        width: 70,
-        height: 70,
-        color: statusColor,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Center(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                table.name,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w700, color: Colors.white),
+
+    return GestureDetector(
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Table: ${table.name}'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('ID: ${table.id}'),
+                  Text('Number of Chairs: ${table.numberOfChairs}'),
+                  table.status == ''
+                      ? const Text('Status: Unknown')
+                      : Text('Status: ${table.status}'),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Close'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: Center(
+        child: Container(
+          width: 70,
+          height: 70,
+          color: statusColor,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  table.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, color: Colors.white),
+                ),
               ),
             ),
           ),

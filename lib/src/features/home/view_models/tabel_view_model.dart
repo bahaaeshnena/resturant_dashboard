@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:task/src/core/data/repositories/tabeles/tabel_repo.dart';
 import 'package:task/src/features/home/models/tabel_model.dart';
@@ -36,6 +37,8 @@ class TableViewModel extends ChangeNotifier {
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
+  final TextEditingController tablesSelectedController =
+      TextEditingController();
 
   Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
@@ -174,6 +177,13 @@ class TableViewModel extends ChangeNotifier {
       clearController();
       notifyListeners();
     }
+  }
+
+  List<SelectedListItem> get availableTablesItems {
+    return _tables
+        .where((table) => table.status == 'Available')
+        .map((table) => SelectedListItem(name: table.name))
+        .toList();
   }
 
   void _setLoading(bool value) {

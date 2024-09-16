@@ -14,45 +14,42 @@ class SectionResturantTables extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Restaurant Tables',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-        ),
-        const SizedBox(height: 10),
-        Expanded(
-          child: StreamBuilder<List<TableModel>>(
-            stream: tableViewModel.tablesStream,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
+    return StreamBuilder<List<TableModel>>(
+      stream: tableViewModel.tablesStream,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const SliverFillRemaining(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
 
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No tables available'));
-              }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const SliverFillRemaining(
+            child: Center(child: Text('No tables available')),
+          );
+        }
 
-              final tables = snapshot.data!;
+        final tables = snapshot.data!;
 
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: tables.length,
-                itemBuilder: (context, index) {
-                  final table = tables[index];
-                  return CustomContainerTablesResturant(table: table);
-                },
-              );
-            },
+        return SliverPadding(
+          padding: const EdgeInsets.all(12),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              childAspectRatio: 1,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final table = tables[index];
+                return CustomContainerTablesResturant(table: table);
+              },
+              childCount: tables.length,
+            ),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

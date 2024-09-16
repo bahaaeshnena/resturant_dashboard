@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class AppTextField extends StatefulWidget {
 
 class _AppTextFieldState extends State<AppTextField> {
   void onTextFieldTap() {
+    log('Categories: ${widget.categories}');
     DropDownState(
       DropDown(
         isDismissible: true,
