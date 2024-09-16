@@ -36,10 +36,21 @@ class CustomContainerTablesResturant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('ID: ${table.id}'),
-                  Text('Number of Chairs: ${table.numberOfChairs}'),
+                  Text(
+                    'Number of Chairs: ${table.numberOfChairs}',
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
                   table.status.isEmpty
-                      ? const Text('Status: Unknown')
-                      : Text('Status: ${table.status}'),
+                      ? Text(
+                          'Status: Unknown',
+                          style: TextStyle(
+                              color: statusColor, fontWeight: FontWeight.w700),
+                        )
+                      : Text(
+                          'Status: ${table.status}',
+                          style: TextStyle(
+                              color: statusColor, fontWeight: FontWeight.w700),
+                        ),
                 ],
               ),
               actions: [
