@@ -14,7 +14,7 @@ class HelperFunction {
     } else if (status == 'Reserved') {
       statusColor = Colors.red;
     } else {
-      statusColor = Colors.black;
+      statusColor = Colors.grey;
     }
 
     showDialog(

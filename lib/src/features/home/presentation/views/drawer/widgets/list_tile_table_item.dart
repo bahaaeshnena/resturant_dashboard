@@ -23,7 +23,7 @@ class ListTileTableItem extends StatelessWidget {
     } else if (tableModel.status == 'Reserved') {
       statusColor = Colors.red;
     } else {
-      statusColor = Colors.black;
+      statusColor = Colors.grey;
     }
 
     return GestureDetector(

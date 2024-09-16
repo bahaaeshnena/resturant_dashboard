@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/src/core/data/repositories/user/user_repo.dart';
 import 'package:task/src/features/auth/models/user_model.dart';
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
-import 'package:task/src/features/home/presentation/views/home_view.dart';
+import 'package:task/src/features/home/presentation/views/home/home_view.dart';
 
 class AuthViewModel with ChangeNotifier {
   final TextEditingController fullNameController = TextEditingController();

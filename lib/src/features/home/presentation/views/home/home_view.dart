@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/features/home/presentation/views/drawer/custom_drawer.dart';
+import 'package:task/src/features/home/presentation/views/home/widgets/body_home_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -20,11 +21,7 @@ class HomeView extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: const Column(
-          children: [
-            Text(''),
-          ],
-        ),
+        body: const BodyHomeView(),
       ),
     );
   }
