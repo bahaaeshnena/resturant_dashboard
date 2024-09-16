@@ -6,8 +6,8 @@ import 'package:task/src/features/home/presentation/views/drawer/widgets/update_
 import 'package:task/src/features/home/view_models/tabel_view_model.dart';
 import 'list_tile_table_item.dart';
 
-class BodyReservationSystemView extends StatelessWidget {
-  const BodyReservationSystemView({super.key});
+class BodyResturantSystemView extends StatelessWidget {
+  const BodyResturantSystemView({super.key});
 
   @override
   Widget build(BuildContext context) {

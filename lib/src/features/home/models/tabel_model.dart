@@ -17,7 +17,7 @@ class TableModel {
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'condition': status,
+      'status': status,
       'numberOfChairs': numberOfChairs,
     };
   }
@@ -26,7 +26,7 @@ class TableModel {
     return TableModel(
       id: map['id'] as String,
       name: map['name'] as String,
-      status: map['condition'] as String,
+      status: map['status'] as String,
       numberOfChairs: map['numberOfChairs'] as String,
     );
   }
@@ -39,15 +39,13 @@ class TableModel {
   TableModel copyWith({
     String? id,
     String? name,
-    String? condition,
+    String? status,
     String? numberOfChairs,
-    required String status,
   }) {
     return TableModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      // ignore: unnecessary_this
-      status: condition ?? this.status,
+      status: status ?? this.status,
       numberOfChairs: numberOfChairs ?? this.numberOfChairs,
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/features/home/presentation/views/drawer/add_table_view.dart';
-import 'package:task/src/features/home/presentation/views/drawer/reservation_system_view.dart';
+import 'package:task/src/features/home/presentation/views/drawer/resturant_system_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/list_tile_item.dart';
 import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 
@@ -47,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
               icon: "assets/images/category-2.svg",
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ReservationSystemView()));
+                    builder: (context) => const ResturantSystemView()));
               },
             ),
             const SizedBox(height: 10),

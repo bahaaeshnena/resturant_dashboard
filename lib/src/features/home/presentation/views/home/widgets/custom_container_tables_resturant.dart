@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/features/home/view_models/tabel_view_model.dart';
 
 class CustomContainerTablesResturant extends StatelessWidget {
   const CustomContainerTablesResturant({
@@ -20,8 +22,10 @@ class CustomContainerTablesResturant extends StatelessWidget {
       statusColor = Colors.grey;
     }
 
+    var provider = Provider.of<TableViewModel>(context, listen: false);
+
     return GestureDetector(
-      onLongPress: () {
+      onLongPress: () async {
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -33,7 +37,7 @@ class CustomContainerTablesResturant extends StatelessWidget {
                 children: [
                   Text('ID: ${table.id}'),
                   Text('Number of Chairs: ${table.numberOfChairs}'),
-                  table.status == ''
+                  table.status.isEmpty
                       ? const Text('Status: Unknown')
                       : Text('Status: ${table.status}'),
                 ],
@@ -41,9 +45,19 @@ class CustomContainerTablesResturant extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                   },
                   child: const Text('Close'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    if (table.status == 'Available') {
+                      await provider.updateStatus(table.id!, 'Reserved');
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Reserve'),
                 ),
               ],
             );

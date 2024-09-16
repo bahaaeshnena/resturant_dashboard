@@ -20,8 +20,7 @@ class TableRepo {
   Stream<List<TableModel>> streamTables() {
     return _firestore.collection(_collectionPath).snapshots().map((snapshot) {
       List<TableModel> tables = snapshot.docs.map((doc) {
-        // ignore: unnecessary_cast
-        return TableModel.fromMap(doc.data() as Map<String, dynamic>);
+        return TableModel.fromMap(doc.data());
       }).toList();
 
       tables.sort((a, b) {
@@ -65,6 +64,29 @@ class TableRepo {
     } catch (e) {
       // ignore: avoid_print
       print('Error deleting table: $e');
+    }
+  }
+
+  Future<void> updateStatus(String id, String status) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(_collectionPath)
+          .where('id', isEqualTo: id)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        throw Exception('Table not found');
+      }
+
+      final documentId = querySnapshot.docs.first.id;
+
+      await _firestore
+          .collection(_collectionPath)
+          .doc(documentId)
+          .update({'status': status});
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error updating table status: $e');
     }
   }
 
