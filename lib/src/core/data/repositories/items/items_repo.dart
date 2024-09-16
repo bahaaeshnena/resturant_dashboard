@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:task/src/features/home/models/item_model.dart';
 
@@ -12,8 +13,7 @@ class ItemsRepo {
           .where('name', isEqualTo: name)
           .get();
     } catch (e) {
-      // ignore: avoid_print
-      print('Error fetching tables by name: $e');
+      log('Error fetching tables by name: $e');
       rethrow;
     }
   }
@@ -34,8 +34,7 @@ class ItemsRepo {
     try {
       await _firestore.collection(_collectionPath).add(item.toMap());
     } catch (e) {
-      // ignore: avoid_print
-      print('Error adding table: $e');
+      log('Error adding table: $e');
     }
   }
 
@@ -51,8 +50,7 @@ class ItemsRepo {
         await doc.reference.delete();
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('Error deleting table: $e');
+      log('Error deleting table: $e');
     }
   }
 }
