@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/custom_container_tables_resturant.dart';
 
-import '../../../../models/tabel_model.dart';
-import '../../../../view_models/tabel_view_model.dart';
+import '../../../../models/table_model.dart';
+import '../../../../view_models/table_view_model.dart';
 
 class SectionResturantTables extends StatelessWidget {
   const SectionResturantTables({

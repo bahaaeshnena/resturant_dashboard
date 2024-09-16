@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/validators/validator.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 import 'package:task/src/core/utils/widgets/custom_text_field.dart';
-import 'package:task/src/features/home/models/tabel_model.dart';
-import 'package:task/src/features/home/view_models/tabel_view_model.dart';
+import 'package:task/src/features/home/models/table_model.dart';
+import 'package:task/src/features/home/view_models/table_view_model.dart';
 
 import '../../../../../../core/common/widgets/app_text_field.dart';
 

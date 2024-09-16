@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:task/src/core/data/repositories/tabeles/tabel_repo.dart';
-import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/core/data/repositories/tables/table_repo.dart';
+import 'package:task/src/features/home/models/table_model.dart';
 import 'package:uuid/uuid.dart';
 
 class TableViewModel extends ChangeNotifier {
@@ -20,15 +19,6 @@ class TableViewModel extends ChangeNotifier {
 
   String? _successMessage;
   String? get successMessage => _successMessage;
-
-  String _status = 'Available';
-  String get status => _status;
-  String tableId = '';
-
-  set status(String value) {
-    _status = value;
-    notifyListeners();
-  }
 
   GlobalKey<FormState> addTabelFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> updateTabelFormKey = GlobalKey<FormState>();
@@ -188,13 +178,6 @@ class TableViewModel extends ChangeNotifier {
       clearController();
       notifyListeners();
     }
-  }
-
-  List<SelectedListItem> get availableTablesItems {
-    return _tables
-        .where((table) => table.status == 'Available')
-        .map((table) => SelectedListItem(name: table.name))
-        .toList();
   }
 
   void _setLoading(bool value) {

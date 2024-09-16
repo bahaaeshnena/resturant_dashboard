@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/features/home/models/table_model.dart';
 
 class ListTileTableItem extends StatelessWidget {
   const ListTileTableItem({

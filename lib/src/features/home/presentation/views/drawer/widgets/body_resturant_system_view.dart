@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/helpers/helper_function.dart';
-import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/features/home/models/table_model.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/update_table_view.dart';
-import 'package:task/src/features/home/view_models/tabel_view_model.dart';
+import 'package:task/src/features/home/view_models/table_view_model.dart';
 import 'list_tile_table_item.dart';
 
 class BodyResturantSystemView extends StatelessWidget {

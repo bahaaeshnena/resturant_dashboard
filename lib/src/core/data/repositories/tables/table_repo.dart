@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:task/src/features/home/models/tabel_model.dart';
+import 'package:task/src/features/home/models/table_model.dart';
 
 class TableRepo {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

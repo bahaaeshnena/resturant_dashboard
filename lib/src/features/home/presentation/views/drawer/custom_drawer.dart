@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/features/home/presentation/views/drawer/add_table_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/resturant_system_view.dart';
+import 'package:task/src/features/home/presentation/views/drawer/widgets/add_items_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/list_tile_item.dart';
 import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 
@@ -65,10 +66,16 @@ class CustomDrawer extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ListTileItem(
-              title: 'Create an invoice',
-              subTitle: 'Create order invoices for customers',
-              icon: "assets/images/moneys.svg",
-              onTap: () {},
+              title: 'Add items ',
+              subTitle: 'To add types and varieties to the restaurant',
+              icon: "assets/images/add.svg",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddItemsView(),
+                  ),
+                );
+              },
             ),
             const Expanded(child: SizedBox()),
             Consumer<AuthViewModel>(
