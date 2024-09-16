@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/validators/validator.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 import 'package:task/src/core/utils/widgets/custom_text_field.dart';
+import 'package:task/src/features/home/models/tabel_model.dart';
 import 'package:task/src/features/home/view_models/tabel_view_model.dart';
 
 import '../../../../../../core/common/widgets/app_text_field.dart';
@@ -15,6 +16,8 @@ class UpdateTableView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TableModel table =
+        ModalRoute.of(context)!.settings.arguments as TableModel;
     return Scaffold(
       appBar: AppBar(title: const Text('Update Table')),
       body: Padding(
@@ -22,7 +25,6 @@ class UpdateTableView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Consumer<TableViewModel>(
             builder: (context, tableViewModel, child) {
-              // Pass the tableId to the ViewModel or handle accordingly
               return Column(
                 children: [
                   Form(
@@ -65,8 +67,7 @@ class UpdateTableView extends StatelessWidget {
                         CustomElevatedButton(
                           text: 'Update',
                           onPressed: () {
-                            // Call the updateTable method with the passed tableId
-                            tableViewModel.updateTable(context, tableId);
+                            tableViewModel.updateTable(context, tableId, table);
                           },
                         ),
                       ],

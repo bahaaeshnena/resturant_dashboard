@@ -54,11 +54,9 @@ class _AppTextFieldState extends State<AppTextField> {
         data: widget.categories ?? [],
         selectedItems: (List<dynamic> selectedList) {
           if (selectedList.isNotEmpty) {
-            // تأكد من أنه يتم تعيين القيمة بشكل صحيح
             var item = selectedList.first;
             if (item is SelectedListItem) {
               widget.textEditingController.text = item.name;
-              // Notify the UI to reflect changes if needed
               setState(() {});
             }
           }

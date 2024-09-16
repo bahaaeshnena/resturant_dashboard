@@ -38,7 +38,7 @@ class BodyReservationSystemView extends StatelessWidget {
                               tableId: table.id!,
                             ),
                             settings: RouteSettings(
-                              arguments: table, // Pass the selected TableModel
+                              arguments: table,
                             ),
                           ),
                         );

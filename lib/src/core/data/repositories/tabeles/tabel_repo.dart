@@ -70,7 +70,6 @@ class TableRepo {
 
   Future<void> updateTable(TableModel table) async {
     try {
-      // Get the document reference
       final querySnapshot = await _firestore
           .collection(_collectionPath)
           .where('id', isEqualTo: table.id)
@@ -80,10 +79,8 @@ class TableRepo {
         throw Exception('Document does not exist');
       }
 
-      // Get the document ID
       final documentId = querySnapshot.docs.first.id;
 
-      // Update the document using the document ID
       await _firestore
           .collection(_collectionPath)
           .doc(documentId)

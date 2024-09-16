@@ -112,10 +112,10 @@ class TableViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> updateTable(BuildContext context, String id) async {
+  Future<void> updateTable(
+      BuildContext context, String id, TableModel table) async {
     _setLoading(true);
     try {
-      // Fetch tables by name to check for name conflicts
       var querySnapshot = await _tableRepo.getTablesByName(nameController.text);
 
       if (querySnapshot.docs.isNotEmpty && querySnapshot.docs.first.id != id) {
@@ -135,14 +135,18 @@ class TableViewModel extends ChangeNotifier {
 
       TableModel updatedTable = TableModel(
         id: id,
-        status: statusController.text,
-        name: nameController.text,
-        numberOfChairs: numberOfChairsController.text,
+        status: statusController.text.isEmpty
+            ? table.status
+            : statusController.text,
+        name: nameController.text.isEmpty ? table.name : nameController.text,
+        numberOfChairs: numberOfChairsController.text.isEmpty
+            ? table.numberOfChairs
+            : numberOfChairsController.text,
       );
 
       await _tableRepo.updateTable(updatedTable);
 
-      final index = _tables.indexWhere((table) => table.id == id);
+      final index = _tables.indexWhere((t) => t.id == id);
       if (index != -1) {
         _tables[index] = updatedTable;
       }
