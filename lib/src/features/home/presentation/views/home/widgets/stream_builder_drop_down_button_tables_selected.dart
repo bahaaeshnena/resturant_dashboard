@@ -54,7 +54,9 @@ class StreamBuilderDropDownButtonTablesSelected extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Selected table: ${selectedTableProvider.selectedTable?.name}',
+              selectedTableProvider.selectedTable != null
+                  ? 'Selected table: ${selectedTableProvider.selectedTable?.name}'
+                  : 'No table selected',
               style: const TextStyle(
                   color: ColorsApp.primaryColor,
                   fontWeight: FontWeight.w700,

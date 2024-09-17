@@ -28,14 +28,6 @@ class HeaderCartInvoiceView extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             Text(
-              'Count',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            Text(
-              'Total Price',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            Text(
               'Delete',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),

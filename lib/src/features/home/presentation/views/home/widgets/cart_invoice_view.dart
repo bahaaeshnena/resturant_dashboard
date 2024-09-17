@@ -24,8 +24,6 @@ class CartInvoiceView extends StatelessWidget {
                 children: [
                   const Text('Item1'),
                   const Text(r'20$'),
-                  const Text('4'),
-                  const Text(r'100$'),
                   GestureDetector(
                     onTap: () {},
                     child: const Icon(
@@ -41,8 +39,6 @@ class CartInvoiceView extends StatelessWidget {
                 children: [
                   const Text('Item1'),
                   const Text(r'20$'),
-                  const Text('4'),
-                  const Text(r'100$'),
                   GestureDetector(
                     onTap: () {},
                     child: const Icon(

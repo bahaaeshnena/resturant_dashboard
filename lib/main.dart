@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/firebase_options.dart';
+import 'package:task/src/core/data/repositories/invoice/invoice_repo.dart';
 import 'package:task/src/core/data/repositories/items/items_repo.dart';
 import 'package:task/src/core/data/repositories/tables/table_repo.dart';
 import 'package:task/src/core/data/repositories/user/user_repo.dart';
@@ -10,6 +11,7 @@ import 'package:task/src/features/auth/view_models/auth_view_model.dart';
 import 'package:task/src/features/auth/view_models/password_visibility_provider.dart';
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 import 'package:task/src/features/home/presentation/views/home/home_view.dart';
+import 'package:task/src/features/home/view_models/invoice_view_model.dart';
 import 'package:task/src/features/home/view_models/item_view_model.dart';
 import 'package:task/src/features/home/view_models/selected_table_view_model.dart';
 import 'package:task/src/features/home/view_models/table_view_model.dart';
@@ -47,6 +49,9 @@ class Task extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ItemViewModel(itemRepo: ItemsRepo()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => InvoiceViewModel(invoiceRepo: InvoiceRepo()),
         ),
         ChangeNotifierProvider(create: (_) => SelectedTableViewModel()),
       ],
