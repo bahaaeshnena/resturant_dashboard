@@ -41,7 +41,6 @@ class StremCustomContainerItemInvoice extends StatelessWidget {
               final item = items[index];
               return CustomContainerItemInvoice(
                 item: item,
-                onTap: () {},
               );
             },
             childCount: items.length,

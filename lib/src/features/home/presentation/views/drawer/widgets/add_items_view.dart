@@ -40,7 +40,7 @@ class AddItemsView extends StatelessWidget {
                       CustomElevatedButton(
                         text: 'Add Item',
                         onPressed: () {
-                          itemViewModel.addTable(context);
+                          itemViewModel.addItem(context);
                         },
                       ),
                     ],

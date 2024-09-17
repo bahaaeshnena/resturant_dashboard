@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/features/home/models/item_model.dart';
+import 'package:task/src/features/home/view_models/item_view_model.dart';
+import 'package:provider/provider.dart';
 
 class CustomContainerItemInvoice extends StatelessWidget {
   const CustomContainerItemInvoice({
     super.key,
     required this.item,
-    this.onTap,
   });
   final ItemModel item;
-  final void Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
+    final itemViewModel = Provider.of<ItemViewModel>(context, listen: false);
+
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        itemViewModel.addItemToCart(item);
+      },
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(

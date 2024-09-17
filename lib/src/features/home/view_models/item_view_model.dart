@@ -13,6 +13,9 @@ class ItemViewModel with ChangeNotifier {
   final List<ItemModel> _tables = [];
   List<ItemModel> get tables => _tables;
 
+  final List<ItemModel> _selectedItems = [];
+  List<ItemModel> get selectedItems => _selectedItems;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -28,7 +31,22 @@ class ItemViewModel with ChangeNotifier {
 
   Stream<List<ItemModel>> get tablesStream => _itemRepo.streamItems();
 
-  Future<void> addTable(BuildContext context) async {
+  void addItemToCart(ItemModel item) {
+    _selectedItems.add(item);
+    notifyListeners();
+  }
+
+  void removeItemFromCart(ItemModel item) {
+    _selectedItems.remove(item);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _selectedItems.clear();
+    notifyListeners();
+  }
+
+  Future<void> addItem(BuildContext context) async {
     if (!addItemFormKey.currentState!.validate()) {
       return;
     }
@@ -105,3 +123,5 @@ class ItemViewModel with ChangeNotifier {
     notifyListeners();
   }
 }
+  // Existing methods...
+

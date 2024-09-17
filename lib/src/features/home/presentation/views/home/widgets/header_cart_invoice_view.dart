@@ -19,13 +19,23 @@ class HeaderCartInvoiceView extends StatelessWidget {
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Items',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Items',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+              ),
             ),
-            Text(
-              'Price',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Price',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+              ),
             ),
             Text(
               'Delete',
