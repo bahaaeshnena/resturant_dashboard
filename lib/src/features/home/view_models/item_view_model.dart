@@ -123,5 +123,3 @@ class ItemViewModel with ChangeNotifier {
     notifyListeners();
   }
 }
-  // Existing methods...
-

@@ -24,8 +24,8 @@ class TableRepo {
       }).toList();
 
       tables.sort((a, b) {
-        final int aTableNumber = _extractTableNumber(a.name);
-        final int bTableNumber = _extractTableNumber(b.name);
+        final int aTableNumber = _extractTableNumber(a.name!);
+        final int bTableNumber = _extractTableNumber(b.name!);
         return aTableNumber.compareTo(bTableNumber);
       });
 

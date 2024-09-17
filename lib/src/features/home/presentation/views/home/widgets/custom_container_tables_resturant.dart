@@ -40,7 +40,7 @@ class CustomContainerTablesResturant extends StatelessWidget {
                     'Number of Chairs: ${table.numberOfChairs}',
                     style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  table.status.isEmpty
+                  table.status!.isEmpty
                       ? Text(
                           'Status: Unknown',
                           style: TextStyle(
@@ -86,7 +86,7 @@ class CustomContainerTablesResturant extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  table.name,
+                  table.name!,
                   style: const TextStyle(
                       fontWeight: FontWeight.w700, color: Colors.white),
                 ),

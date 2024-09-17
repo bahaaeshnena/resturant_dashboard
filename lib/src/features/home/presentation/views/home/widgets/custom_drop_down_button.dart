@@ -23,7 +23,7 @@ class CustomDropDownButton extends StatelessWidget {
         return DropdownMenuItem<TableModel>(
           value: table,
           child: Text(
-            table.name,
+            table.name!,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,

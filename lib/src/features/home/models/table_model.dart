@@ -2,15 +2,15 @@ import 'dart:convert';
 
 class TableModel {
   final String? id;
-  final String name;
-  final String status;
-  final String numberOfChairs;
+  final String? name;
+  final String? status;
+  final String? numberOfChairs;
 
   TableModel({
     this.id,
-    required this.status,
-    required this.name,
-    required this.numberOfChairs,
+    this.status,
+    this.name,
+    this.numberOfChairs,
   });
 
   Map<String, dynamic> toMap() {

@@ -10,4 +10,9 @@ class SelectedTableViewModel extends ChangeNotifier {
     _selectedTable = table;
     notifyListeners();
   }
+
+  void clearSelectedTable() {
+    _selectedTable = null;
+    notifyListeners();
+  }
 }

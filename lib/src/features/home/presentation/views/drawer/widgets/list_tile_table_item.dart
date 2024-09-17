@@ -30,7 +30,7 @@ class ListTileTableItem extends StatelessWidget {
       onTap: onTap,
       child: ListTile(
         title: Text(
-          tableModel.name,
+          tableModel.name!,
           style: const TextStyle(fontWeight: FontWeight.w800),
         ),
         subtitle: Column(
@@ -40,7 +40,7 @@ class ListTileTableItem extends StatelessWidget {
               children: [
                 const Text('Number of Chairs: '),
                 Text(
-                  tableModel.numberOfChairs,
+                  tableModel.numberOfChairs!,
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ],
@@ -49,7 +49,7 @@ class ListTileTableItem extends StatelessWidget {
               children: [
                 const Text('Status: '),
                 Text(
-                  tableModel.status,
+                  tableModel.status!,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: statusColor,

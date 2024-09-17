@@ -77,9 +77,9 @@ class BodyResturantSystemView extends StatelessWidget {
                       onTap: () {
                         HelperFunction.showAlert(
                           context,
-                          table.name,
+                          table.name!,
                           table.id!,
-                          table.status,
+                          table.status!,
                           table.numberOfChairs.toString(),
                         );
                       },
