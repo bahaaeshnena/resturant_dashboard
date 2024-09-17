@@ -8,22 +8,20 @@ class CustomDropDownButton extends StatelessWidget {
     super.key,
     required this.tableViewModel,
     required this.reservedTables,
+    required this.onTableSelected,
   });
 
   final TableViewModel tableViewModel;
   final List<TableModel> reservedTables;
+  final void Function(TableModel) onTableSelected;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: tableViewModel.selectedTable,
-      hint: const Text(
-        'Select a reserved table',
-        style: TextStyle(color: Colors.white),
-      ),
+    return DropdownButton<TableModel>(
+      hint: const Text('Select Table'),
       items: reservedTables.map((TableModel table) {
-        return DropdownMenuItem<String>(
-          value: table.id,
+        return DropdownMenuItem<TableModel>(
+          value: table,
           child: Text(
             table.name,
             style: const TextStyle(
@@ -33,8 +31,10 @@ class CustomDropDownButton extends StatelessWidget {
           ),
         );
       }).toList(),
-      onChanged: (String? value) {
-        tableViewModel.setSelectedTable(value);
+      onChanged: (selectedTable) {
+        if (selectedTable != null) {
+          onTableSelected(selectedTable);
+        }
       },
       dropdownColor: ColorsApp.secondaryColor,
       icon: const Icon(

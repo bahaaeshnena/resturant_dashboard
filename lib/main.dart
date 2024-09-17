@@ -11,6 +11,7 @@ import 'package:task/src/features/auth/view_models/password_visibility_provider.
 import 'package:task/src/features/auth/presentation/views/sign_in/sign_in_view.dart';
 import 'package:task/src/features/home/presentation/views/home/home_view.dart';
 import 'package:task/src/features/home/view_models/item_view_model.dart';
+import 'package:task/src/features/home/view_models/selected_table_view_model.dart';
 import 'package:task/src/features/home/view_models/table_view_model.dart';
 
 void main() async {
@@ -47,6 +48,7 @@ class Task extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ItemViewModel(itemRepo: ItemsRepo()),
         ),
+        ChangeNotifierProvider(create: (_) => SelectedTableViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
