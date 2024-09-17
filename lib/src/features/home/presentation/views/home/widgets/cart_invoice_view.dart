@@ -17,23 +17,39 @@ class CartInvoiceView extends StatelessWidget {
           child: Column(
             children: [
               const HeaderCartInvoiceView(),
-              const Row(
+              const Divider(),
+              const SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Item1'),
-                  Text(r'20$'),
-                  Text('4'),
-                  Text(r'100$'),
+                  const Text('Item1'),
+                  const Text(r'20$'),
+                  const Text('4'),
+                  const Text(r'100$'),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.red,
+                    ),
+                  )
                 ],
               ),
               const SizedBox(height: 20),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Item1'),
-                  Text(r'20$'),
-                  Text('4'),
-                  Text(r'100$'),
+                  const Text('Item1'),
+                  const Text(r'20$'),
+                  const Text('4'),
+                  const Text(r'100$'),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.red,
+                    ),
+                  )
                 ],
               ),
               const SizedBox(height: 20),

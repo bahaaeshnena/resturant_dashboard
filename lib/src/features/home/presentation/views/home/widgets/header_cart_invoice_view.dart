@@ -12,7 +12,7 @@ class HeaderCartInvoiceView extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Table name: ${selectedTableProvider.selectedTable?.name ?? 'N/A'}',
+          'Table name: ${selectedTableProvider.selectedTable?.name ?? 'No table selected'}',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         const SizedBox(height: 20),
@@ -21,19 +21,23 @@ class HeaderCartInvoiceView extends StatelessWidget {
           children: [
             Text(
               'Items',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             Text(
               'Price',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             Text(
               'Count',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             Text(
               'Total Price',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            Text(
+              'Delete',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ],
         ),
