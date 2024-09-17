@@ -26,6 +26,8 @@ class ItemViewModel with ChangeNotifier {
   final TextEditingController nameItemController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
 
+  Stream<List<ItemModel>> get tablesStream => _itemRepo.streamItems();
+
   Future<void> addTable(BuildContext context) async {
     if (!addItemFormKey.currentState!.validate()) {
       return;
@@ -56,7 +58,7 @@ class ItemViewModel with ChangeNotifier {
       ItemModel newItem = ItemModel(
         id: id,
         name: nameItemController.text,
-        price: priceController.text,
+        price: int.parse(priceController.text),
       );
 
       await _itemRepo.addItem(newItem);

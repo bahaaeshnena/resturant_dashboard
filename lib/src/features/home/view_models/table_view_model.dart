@@ -30,6 +30,15 @@ class TableViewModel extends ChangeNotifier {
   final TextEditingController tablesSelectedController =
       TextEditingController();
 
+  String? _selectedTable;
+
+  String? get selectedTable => _selectedTable;
+
+  void setSelectedTable(String? value) {
+    _selectedTable = value;
+    notifyListeners();
+  }
+
   Stream<List<TableModel>> get tablesStream => _tableRepo.streamTables();
 
   Future<void> addTable(BuildContext context) async {

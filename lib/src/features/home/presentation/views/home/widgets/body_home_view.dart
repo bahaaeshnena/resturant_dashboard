@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
+import 'package:task/src/features/home/presentation/views/home/widgets/create_an_invoice_view.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/section_resturant_tables.dart';
+import 'package:task/src/features/home/view_models/item_view_model.dart';
 import 'package:task/src/features/home/view_models/table_view_model.dart';
 
 class BodyHomeView extends StatelessWidget {
@@ -9,6 +12,7 @@ class BodyHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableViewModel = Provider.of<TableViewModel>(context);
+    final itemViewModel = Provider.of<ItemViewModel>(context);
 
     return CustomScrollView(
       slivers: [
@@ -30,6 +34,28 @@ class BodyHomeView extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 18),
           sliver: SectionResturantTables(tableViewModel: tableViewModel),
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: CustomElevatedButton(
+                  text: 'Create an invoice',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CreateAnInvoiceView(
+                          itemViewModel: itemViewModel,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

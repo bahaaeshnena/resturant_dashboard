@@ -4,7 +4,7 @@ import 'dart:convert';
 class ItemModel {
   final String id;
   final String name;
-  final String price;
+  final int price;
 
   ItemModel({
     required this.id,
@@ -15,7 +15,7 @@ class ItemModel {
   ItemModel copyWith({
     String? name,
     String? id,
-    String? price,
+    int? price,
   }) {
     return ItemModel(
       id: id ?? this.id,
@@ -36,7 +36,7 @@ class ItemModel {
     return ItemModel(
       id: map['id'] as String,
       name: map['name'] as String,
-      price: map['price'] as String,
+      price: map['price'] as int,
     );
   }
 

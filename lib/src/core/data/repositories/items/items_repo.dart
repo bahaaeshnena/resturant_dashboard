@@ -18,6 +18,20 @@ class ItemsRepo {
     }
   }
 
+  Stream<List<ItemModel>> streamItems() {
+    return _firestore.collection(_collectionPath).snapshots().map((snapshot) {
+      List<ItemModel> items = snapshot.docs.map((doc) {
+        return ItemModel.fromMap(doc.data());
+      }).toList();
+
+      items.sort((a, b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+
+      return items;
+    });
+  }
+
   Future<List<ItemModel>> getItems() async {
     try {
       QuerySnapshot querySnapshot =
