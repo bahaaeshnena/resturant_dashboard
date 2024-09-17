@@ -7,9 +7,12 @@ class InvoiceModel {
   final String? id;
   final TableModel table;
   final List<ItemModel> items;
-  final DateTime date;
+  final DateTime? date;
   final double totalPrice;
+  final bool paid;
+
   InvoiceModel({
+    this.paid = false,
     this.id,
     required this.table,
     required this.items,
@@ -23,6 +26,7 @@ class InvoiceModel {
     List<ItemModel>? items,
     DateTime? date,
     double? totalPrice,
+    bool? paid,
   }) {
     return InvoiceModel(
       id: id ?? this.id,
@@ -30,6 +34,7 @@ class InvoiceModel {
       items: items ?? this.items,
       date: date ?? this.date,
       totalPrice: totalPrice ?? this.totalPrice,
+      paid: paid ?? this.paid,
     );
   }
 
@@ -38,8 +43,9 @@ class InvoiceModel {
       'id': id,
       'table': table.toMap(),
       'items': items.map((x) => x.toMap()).toList(),
-      'date': date.millisecondsSinceEpoch,
+      'date': date?.toIso8601String(),
       'totalPrice': totalPrice,
+      'paid': paid,
     };
   }
 
@@ -48,12 +54,15 @@ class InvoiceModel {
       id: map['id'] != null ? map['id'] as String : null,
       table: TableModel.fromMap(map['table'] as Map<String, dynamic>),
       items: List<ItemModel>.from(
-        (map['items'] as List<int>).map<ItemModel>(
+        (map['items'] as List<dynamic>).map<ItemModel>(
           (x) => ItemModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: map['date'] != null
+          ? DateTime.parse(map['date'])
+          : null, // Parse ISO 8601 string to DateTime
       totalPrice: map['totalPrice'] as double,
+      paid: map['paid'] != null ? map['paid'] as bool : false,
     );
   }
 
@@ -64,7 +73,7 @@ class InvoiceModel {
 
   @override
   String toString() {
-    return 'InvoiceModel(id: $id, table: $table, items: $items, date: $date, totalPrice: $totalPrice)';
+    return 'InvoiceModel(id: $id, table: $table, items: $items, date: $date, totalPrice: $totalPrice,paid: $paid)';
   }
 
   @override
@@ -75,7 +84,8 @@ class InvoiceModel {
         other.table == table &&
         listEquals(other.items, items) &&
         other.date == date &&
-        other.totalPrice == totalPrice;
+        other.totalPrice == totalPrice &&
+        other.paid == paid;
   }
 
   @override
@@ -84,6 +94,7 @@ class InvoiceModel {
         table.hashCode ^
         items.hashCode ^
         date.hashCode ^
-        totalPrice.hashCode;
+        totalPrice.hashCode ^
+        paid.hashCode;
   }
 }

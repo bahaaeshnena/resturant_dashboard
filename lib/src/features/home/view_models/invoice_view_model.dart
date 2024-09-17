@@ -5,6 +5,8 @@ import 'package:task/src/features/home/models/item_model.dart';
 import 'package:task/src/features/home/models/table_model.dart';
 import 'package:uuid/uuid.dart';
 
+import 'package:intl/intl.dart';
+
 class InvoiceViewModel with ChangeNotifier {
   InvoiceViewModel({required InvoiceRepo invoiceRepo})
       : _invoiceRepo = invoiceRepo;
@@ -12,13 +14,13 @@ class InvoiceViewModel with ChangeNotifier {
   final InvoiceRepo _invoiceRepo;
 
   Future<void> createInvoice(
-      TableModel table, List<ItemModel> items, double totalPrice) async {
+      TableModel tableName, List<ItemModel> items, double totalPrice) async {
     String id = const Uuid().v4();
     DateTime date = DateTime.now();
 
     InvoiceModel newInvoice = InvoiceModel(
       id: id,
-      table: table,
+      table: TableModel(name: tableName.name, id: tableName.id),
       items: items,
       date: date,
       totalPrice: totalPrice,
@@ -29,5 +31,10 @@ class InvoiceViewModel with ChangeNotifier {
     } catch (e) {
       throw Exception('Failed to create invoice: $e');
     }
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    return formatter.format(date);
   }
 }

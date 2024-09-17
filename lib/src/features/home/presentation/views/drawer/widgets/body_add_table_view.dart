@@ -24,20 +24,20 @@ class BodyAddTableView extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomTextField(
+                        controller: tableViewModel.nameController,
+                        validator: (value) =>
+                            Validator.validateEmptyText("Name Table", value),
+                        icon: 'assets/images/name.svg',
+                        hint: 'Name Table',
+                      ),
+                      const SizedBox(height: 20),
+                      CustomTextField(
                         controller: tableViewModel.numberOfChairsController,
                         validator: (value) => Validator.validateEmptyText(
                             "Number of chairs", value),
                         keyboardType: TextInputType.number,
                         icon: 'assets/images/number.svg',
                         hint: 'Number of chairs',
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        controller: tableViewModel.nameController,
-                        validator: (value) =>
-                            Validator.validateEmptyText("Name Table", value),
-                        icon: 'assets/images/name.svg',
-                        hint: 'Name Table',
                       ),
                       const SizedBox(height: 20),
                       AppTextField(
