@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
-import 'package:task/src/features/home/presentation/views/home/widgets/card_invoice.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/create_an_invoice_view.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/section_resturant_tables.dart';
+import 'package:task/src/features/home/presentation/views/home/widgets/stream_builder_card_invoice_page_view.dart';
 import 'package:task/src/features/home/view_models/item_view_model.dart';
 import 'package:task/src/features/home/view_models/table_view_model.dart';
 
@@ -59,28 +58,21 @@ class BodyHomeView extends StatelessWidget {
             ],
           ),
         ),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.all(18),
+            padding: EdgeInsets.all(18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Invoices',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                   ),
                 ),
-                const SizedBox(height: 10),
-                ExpandablePageView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    CardInvoice(),
-                    CardInvoice(),
-                    CardInvoice(),
-                  ],
-                ),
+                SizedBox(height: 10),
+                StreamBuilderCardInvoicePageView(),
               ],
             ),
           ),

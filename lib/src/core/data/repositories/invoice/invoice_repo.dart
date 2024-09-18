@@ -29,7 +29,7 @@ class InvoiceRepo {
     try {
       await _firestore
           .collection(_collectionPath)
-          .doc()
+          .doc(invoiceId) // Use the invoiceId parameter
           .update(invoice.toMap());
     } catch (e) {
       throw Exception('Failed to update invoice: $e');
@@ -38,7 +38,13 @@ class InvoiceRepo {
 
   Future<void> deleteInvoice(String invoiceId) async {
     try {
-      await _firestore.collection(_collectionPath).doc(invoiceId).delete();
+      final querySnapshot = await _firestore
+          .collection(_collectionPath)
+          .where('id', isEqualTo: invoiceId)
+          .get();
+      for (var doc in querySnapshot.docs) {
+        await doc.reference.delete();
+      }
     } catch (e) {
       throw Exception('Failed to delete invoice: $e');
     }

@@ -12,7 +12,11 @@ class InvoiceViewModel with ChangeNotifier {
       : _invoiceRepo = invoiceRepo;
 
   final InvoiceRepo _invoiceRepo;
+  final List<TableModel> _invoices = [];
 
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+  List<TableModel> get invoices => _invoices;
   Future<void> createInvoice(
       TableModel tableName, List<ItemModel> items, double totalPrice) async {
     String id = const Uuid().v4();
@@ -35,6 +39,17 @@ class InvoiceViewModel with ChangeNotifier {
       await _invoiceRepo.addInvoice(newInvoice);
     } catch (e) {
       throw Exception('Failed to create invoice: $e');
+    }
+  }
+
+  Future<void> deleteInvoice(String id) async {
+    try {
+      await _invoiceRepo.deleteInvoice(id);
+      _invoices.removeWhere((table) => table.id == id);
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to delete table';
+      notifyListeners();
     }
   }
 

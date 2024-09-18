@@ -3,8 +3,18 @@ import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 
 class CardInvoice extends StatelessWidget {
+  final String tableName;
+  final String invoiceId;
+  final String date;
+  final double totalPrice;
+  final Future<void> Function()? onPay;
   const CardInvoice({
     super.key,
+    required this.tableName,
+    required this.invoiceId,
+    required this.date,
+    required this.totalPrice,
+    required this.onPay,
   });
 
   @override
@@ -27,9 +37,9 @@ class CardInvoice extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const Row(
+                    Row(
                       children: [
-                        Text(
+                        const Text(
                           'Table name : ',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -37,35 +47,41 @@ class CardInvoice extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'table 1',
-                          style: TextStyle(
+                          tableName,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    const Row(
-                      children: [
-                        Text(
-                          'ID Invoice : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        children: [
+                          const Text(
+                            'ID Invoice : ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '123456788987654321',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              invoiceId,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 10),
-                    const Row(
+                    Row(
                       children: [
-                        Text(
+                        const Text(
                           'Date : ',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -73,25 +89,17 @@ class CardInvoice extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '09-09-2022',
-                          style: TextStyle(
+                          date,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      'Items : ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Total Price : ',
-                      style: TextStyle(
+                    Text(
+                      'Total Price : \$${totalPrice.toStringAsFixed(2)}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -99,7 +107,7 @@ class CardInvoice extends StatelessWidget {
                     const Expanded(child: SizedBox()),
                     CustomElevatedButton(
                       text: 'Pay the bill',
-                      onPressed: () {},
+                      onPressed: onPay,
                     )
                   ],
                 ),
