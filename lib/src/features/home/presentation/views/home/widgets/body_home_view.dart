@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
+import 'package:task/src/features/home/presentation/views/home/widgets/card_invoice.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/create_an_invoice_view.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/section_resturant_tables.dart';
 import 'package:task/src/features/home/view_models/item_view_model.dart';
@@ -57,6 +58,9 @@ class BodyHomeView extends StatelessWidget {
             ],
           ),
         ),
+        const SliverToBoxAdapter(
+          child: CardInvoice(),
+        )
       ],
     );
   }

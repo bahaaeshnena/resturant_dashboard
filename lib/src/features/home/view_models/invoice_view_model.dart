@@ -20,7 +20,12 @@ class InvoiceViewModel with ChangeNotifier {
 
     InvoiceModel newInvoice = InvoiceModel(
       id: id,
-      table: TableModel(name: tableName.name, id: tableName.id),
+      table: TableModel(
+        name: tableName.name,
+        id: tableName.id,
+        status: tableName.status,
+        numberOfChairs: tableName.numberOfChairs,
+      ),
       items: items,
       date: date,
       totalPrice: totalPrice,
