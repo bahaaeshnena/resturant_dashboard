@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/core/utils/widgets/custom_elevated_button.dart';
 import 'package:task/src/features/home/presentation/views/home/widgets/card_invoice.dart';
@@ -58,9 +59,32 @@ class BodyHomeView extends StatelessWidget {
             ],
           ),
         ),
-        const SliverToBoxAdapter(
-          child: CardInvoice(),
-        )
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Invoices',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ExpandablePageView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CardInvoice(),
+                    CardInvoice(),
+                    CardInvoice(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

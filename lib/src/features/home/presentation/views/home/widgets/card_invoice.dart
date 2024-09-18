@@ -14,14 +14,6 @@ class CardInvoice extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Invoices',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-            ),
-          ),
-          const SizedBox(height: 20),
           AspectRatio(
             aspectRatio: 1 / 1,
             child: Container(
