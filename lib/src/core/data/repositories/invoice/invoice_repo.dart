@@ -25,12 +25,21 @@ class InvoiceRepo {
     }
   }
 
-  Future<void> updateInvoice(String invoiceId, InvoiceModel invoice) async {
+  Future<void> updateInvoice(String invoiceId, bool paid) async {
     try {
+      final querySnapshot = await _firestore
+          .collection(_collectionPath)
+          .where('id', isEqualTo: invoiceId)
+          .get();
+      if (querySnapshot.docs.isEmpty) {
+        throw Exception('Invoice not found');
+      }
+      final documentId = querySnapshot.docs.first.id;
+
       await _firestore
           .collection(_collectionPath)
-          .doc(invoiceId) // Use the invoiceId parameter
-          .update(invoice.toMap());
+          .doc(documentId)
+          .update({'paid': paid});
     } catch (e) {
       throw Exception('Failed to update invoice: $e');
     }

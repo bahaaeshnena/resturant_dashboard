@@ -117,7 +117,6 @@ class TableViewModel extends ChangeNotifier {
   Future<void> updateStatus(String id, String status) async {
     try {
       await _tableRepo.updateStatus(id, status);
-      // Optionally: Update the local list if needed
       notifyListeners();
     } catch (e) {
       _errorMessage = 'Failed to update table status';

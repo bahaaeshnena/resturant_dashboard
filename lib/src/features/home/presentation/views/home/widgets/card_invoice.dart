@@ -8,6 +8,8 @@ class CardInvoice extends StatelessWidget {
   final String date;
   final double totalPrice;
   final Future<void> Function()? onPay;
+  final String text;
+
   const CardInvoice({
     super.key,
     required this.tableName,
@@ -15,6 +17,7 @@ class CardInvoice extends StatelessWidget {
     required this.date,
     required this.totalPrice,
     required this.onPay,
+    required this.text,
   });
 
   @override
@@ -106,7 +109,7 @@ class CardInvoice extends StatelessWidget {
                     ),
                     const Expanded(child: SizedBox()),
                     CustomElevatedButton(
-                      text: 'Pay the bill',
+                      text: text,
                       onPressed: onPay,
                     )
                   ],

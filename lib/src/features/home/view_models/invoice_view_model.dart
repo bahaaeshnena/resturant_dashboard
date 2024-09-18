@@ -53,6 +53,16 @@ class InvoiceViewModel with ChangeNotifier {
     }
   }
 
+  Future<void> updateInvoicePaid(String id, bool paid) async {
+    try {
+      await _invoiceRepo.updateInvoice(id, paid);
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to update invoice paid';
+      notifyListeners();
+    }
+  }
+
   String formatDate(DateTime date) {
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return formatter.format(date);

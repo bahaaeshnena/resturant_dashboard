@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task/src/features/home/presentation/views/drawer/add_table_view.dart';
+import 'package:task/src/features/home/presentation/views/drawer/all_paid_biils.dart';
 import 'package:task/src/features/home/presentation/views/drawer/resturant_system_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/add_items_view.dart';
 import 'package:task/src/features/home/presentation/views/drawer/widgets/list_tile_item.dart';
@@ -73,6 +74,19 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const AddItemsView(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTileItem(
+              title: 'Paid bills',
+              subTitle: 'View all paid invoices',
+              icon: "assets/images/moneys.svg",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AllPaidBills(),
                   ),
                 );
               },
