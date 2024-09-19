@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:task/src/core/data/repositories/invoice/invoice_repo.dart';
 import 'package:task/src/features/home/models/invoice_model.dart';
@@ -13,6 +14,7 @@ class InvoiceViewModel with ChangeNotifier {
 
   final InvoiceRepo _invoiceRepo;
   final List<TableModel> _invoices = [];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
@@ -66,5 +68,22 @@ class InvoiceViewModel with ChangeNotifier {
   String formatDate(DateTime date) {
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return formatter.format(date);
+  }
+
+  Future<void> updateTableStatusToReserved(
+      String tableId, String status) async {
+    final querySnapshot = await _firestore
+        .collection('tables')
+        .where('id', isEqualTo: tableId)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
+      throw Exception('Invoice not found');
+    }
+    final documentId = querySnapshot.docs.first.id;
+
+    await _firestore
+        .collection('tables')
+        .doc(documentId)
+        .update({'status': status});
   }
 }

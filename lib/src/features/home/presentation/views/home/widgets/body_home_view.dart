@@ -60,15 +60,19 @@ class BodyHomeView extends StatelessWidget {
         ),
         const SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(18),
+            padding: EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Invoices(Unpaid)',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
+                SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Invoices(Unpaid)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -77,6 +81,13 @@ class BodyHomeView extends StatelessWidget {
             ),
           ),
         ),
+        // const SliverToBoxAdapter(
+        //   child: SizedBox(
+        //     width: double.infinity,
+        //     height: 300,
+        //     child: Chart(),
+        //   ),
+        // ),
       ],
     );
   }

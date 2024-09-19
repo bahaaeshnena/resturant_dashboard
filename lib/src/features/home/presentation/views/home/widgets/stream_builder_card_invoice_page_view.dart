@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
@@ -45,14 +43,19 @@ class StreamBuilderCardInvoicePageView extends StatelessWidget {
             return Consumer<InvoiceViewModel>(
               builder: (context, value, child) {
                 return CardInvoice(
-                  tableName: invoice.table.name!,
+                  tableName: invoice.table.name ?? 'Unknown Table',
                   invoiceId: invoice.id ?? 'Unknown ID',
                   date: invoice.date != null
                       ? '${invoice.date!.day} ${_getMonthName(invoice.date!.month)}, ${invoice.date!.year}'
                       : 'Unknown date',
                   totalPrice: invoice.totalPrice,
+                  items: invoice.items,
                   onPay: () async {
+                    // Update the invoice as paid
                     await value.updateInvoicePaid(invoice.id ?? '', true);
+
+                    await value.updateTableStatusToReserved(
+                        invoice.table.id ?? '', 'Available');
                   },
                   text: 'Pay the bill',
                 );

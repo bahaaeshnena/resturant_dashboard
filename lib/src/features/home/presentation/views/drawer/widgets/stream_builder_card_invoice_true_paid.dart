@@ -75,6 +75,7 @@ class StreamBuilderCardInvoiceTruePaid extends StatelessWidget {
                         ? '${invoice.date!.day} ${_getMonthName(invoice.date!.month)}, ${invoice.date!.year}'
                         : 'Unknown date',
                     totalPrice: invoice.totalPrice,
+                    items: invoice.items,
                     onPay: () async {
                       await value.updateInvoicePaid(invoice.id ?? '', false);
                     },
