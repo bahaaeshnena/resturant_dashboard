@@ -24,8 +24,14 @@ class ListTileItem extends StatelessWidget {
         height: 30,
         width: 30,
       ),
-      title: Text(title),
-      subtitle: Text(subTitle),
+      title: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(title),
+      ),
+      subtitle: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(subTitle),
+      ),
     );
   }
 }
