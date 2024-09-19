@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task/src/core/utils/constants/colors.dart';
 import 'package:task/src/features/home/models/item_model.dart';
 import 'package:task/src/features/home/view_models/item_view_model.dart';
@@ -15,9 +16,18 @@ class CustomContainerItemInvoice extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemViewModel = Provider.of<ItemViewModel>(context, listen: false);
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         itemViewModel.addItemToCart(item);
+        Fluttertoast.showToast(
+          msg: '(${item.name}) added to cart',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 0,
+          backgroundColor: ColorsApp.primaryColor.withOpacity(0.5),
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       },
       child: Container(
         decoration: BoxDecoration(
