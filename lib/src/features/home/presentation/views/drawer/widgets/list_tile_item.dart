@@ -13,7 +13,6 @@ class ListTileItem extends StatelessWidget {
   final String title;
   final String subTitle;
   final String icon;
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -24,14 +23,8 @@ class ListTileItem extends StatelessWidget {
         height: 30,
         width: 30,
       ),
-      title: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(title),
-      ),
-      subtitle: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(subTitle),
-      ),
+      title: Text(title),
+      subtitle: Text(subTitle),
     );
   }
 }

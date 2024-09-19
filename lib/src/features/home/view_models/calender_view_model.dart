@@ -19,6 +19,7 @@ class CalendarViewModel extends ChangeNotifier {
 
   // Formatting the date as 'yyyy-MM-dd' for comparison
   String getFormattedDate() {
+    // ignore: unnecessary_string_interpolations
     return '${_selectedDate.toIso8601String().split('T').first}';
   }
 }
